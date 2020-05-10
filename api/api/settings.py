@@ -28,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LIQPAY_PUBLIC_KEY = ''
-LIQPAY_PRIVATE_KEY = ''
+LIQPAY_PUBLIC_KEY = 'sandbox_i63562475561'
+LIQPAY_PRIVATE_KEY = 'sandbox_D0jJYMaRzqAVUanGLzJtydTjAXGd99T8lEInah19'
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'payment/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

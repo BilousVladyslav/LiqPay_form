@@ -1,29 +1,27 @@
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from liqpay.liqpay import LiqPay
-
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.http import HttpResponse
-
-from api.api import settings
+from liqpay.liqpay3 import LiqPay
+from api import settings
 
 
 class PayView(TemplateView):
-    template_name = 'billing/pay.html'
+    template_name = 'payment.html'
 
     def get(self, request, *args, **kwargs):
         liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
         params = {
             'action': 'pay',
-            'amount': '100',
+            'amount': '3.22',
             'currency': 'USD',
             'description': 'Payment for clothes',
             'order_id': 'order_id_1',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
-            'server_url': 'https://test.com/billing/pay-callback/', # url to callback view
+            'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
         }
         signature = liqpay.cnb_signature(params)
         data = liqpay.cnb_data(params)

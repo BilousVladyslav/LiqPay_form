@@ -4,7 +4,7 @@ chardet==3.0.4
 Django==3.0.6
 djangorestframework==3.11.0
 idna==2.9
-liqpay-python==1.0
+liqpay-python @ git+https://github.com/liqpay/sdk-python@f3a81847f2b518c3936461880e0451eb02f33b25
 pytz==2020.1
 requests==2.23.0
 sqlparse==0.3.1
