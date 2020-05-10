@@ -24,9 +24,9 @@ STATIC_URL = '/static/'
 SECRET_KEY = 'x_(!0$4*a-kzt7ug6naol5_0n^ktw^%gjp6^_11d3lngq@68v*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['afternoon-reaches-36943.herokuapp.com',]
+ALLOWED_HOSTS = ['afternoon-reaches-36943.herokuapp.com', '127.0.0.1']
 
 LIQPAY_PUBLIC_KEY = 'sandbox_i63562475561'
 LIQPAY_PRIVATE_KEY = 'sandbox_D0jJYMaRzqAVUanGLzJtydTjAXGd99T8lEInah19'

@@ -8,6 +8,13 @@ from liqpay.liqpay3 import LiqPay
 from api import settings
 
 
+def output_callback(callback):
+    print('/n===========================================/n')
+    for key, value in callback:
+        print(f'{key}: {value}')
+    print('/n===========================================/n')
+
+
 class PayView(TemplateView):
     template_name = 'payment.html'
 
@@ -17,8 +24,7 @@ class PayView(TemplateView):
             'action': 'pay',
             'amount': '3.22',
             'currency': 'USD',
-            'description': 'Payment for clothes',
-            'order_id': 'order_id_1',
+            'description': 'Защита лабораторной работы №5: Белоус, Пакин, Посыпайко, Иваненко.',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
@@ -38,5 +44,5 @@ class PayCallbackView(View):
         if sign == signature:
             print('callback is valid')
         response = liqpay.decode_data_from_str(data)
-        print('callback data', response)
+        output_callback(response)
         return HttpResponse()
