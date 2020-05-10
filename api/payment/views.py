@@ -44,5 +44,5 @@ class PayCallbackView(View):
         if sign == signature:
             print('callback is valid')
         response = liqpay.decode_data_from_str(data)
-        output_callback(response)
+        print('Callback: ', response)
         return HttpResponse()
