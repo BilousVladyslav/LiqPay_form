@@ -9,10 +9,12 @@ from api import settings
 
 
 def output_callback(callback):
-    print('/n===========================================/n')
-    for key, value in callback:
+    print('===========================================')
+    print()
+    for key, value in callback.items():
         print(f'{key}: {value}')
-    print('/n===========================================/n')
+    print()
+    print('===========================================')
 
 
 class PayView(TemplateView):
@@ -45,4 +47,5 @@ class PayCallbackView(View):
             print('callback is valid')
         response = liqpay.decode_data_from_str(data)
         print('Callback: ', response)
+        output_callback(response)
         return HttpResponse()
