@@ -17,7 +17,14 @@ def output_callback(callback):
     print('===========================================')
 
 
-class PayView(TemplateView):
+class MainPageView(TemplateView):
+    template_name = 'main.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
+class PayView1(TemplateView):
     template_name = 'payment.html'
 
     def get(self, request, *args, **kwargs):
@@ -26,7 +33,48 @@ class PayView(TemplateView):
             'action': 'pay',
             'amount': '3.22',
             'currency': 'USD',
-            'description': 'Защита лабораторной работы №5: Белоус, Пакин, Посыпайко, Иваненко.',
+            'description': 'HONDA ACCORD LX: Low KMS car',
+            'order_id': 'LowKMS-car',
+            'version': '3',
+            'sandbox': 0, # sandbox mode, set to 1 to enable it
+            'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
+        }
+        signature = liqpay.cnb_signature(params)
+        data = liqpay.cnb_data(params)
+        return render(request, self.template_name, {'signature': signature, 'data': data})
+
+
+class PayView2(TemplateView):
+    template_name = 'payment.html'
+
+    def get(self, request, *args, **kwargs):
+        liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
+        params = {
+            'action': 'pay',
+            'amount': '5.99',
+            'currency': 'USD',
+            'description': 'HONDA CIVIC HATCHBACK LS: Fully-Loaded car',
+            'order_id' : 'FL-car',
+            'version': '3',
+            'sandbox': 0, # sandbox mode, set to 1 to enable it
+            'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
+        }
+        signature = liqpay.cnb_signature(params)
+        data = liqpay.cnb_data(params)
+        return render(request, self.template_name, {'signature': signature, 'data': data})
+
+
+class PayView3(TemplateView):
+    template_name = 'payment.html'
+
+    def get(self, request, *args, **kwargs):
+        liqpay = LiqPay(settings.LIQPAY_PUBLIC_KEY, settings.LIQPAY_PRIVATE_KEY)
+        params = {
+            'action': 'pay',
+            'amount': '10.99',
+            'currency': 'USD',
+            'description': 'HONDA ACCORD HYBRID LT: Price Reduced car',
+            'order_id': 'PR-car',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
@@ -44,8 +92,7 @@ class PayCallbackView(View):
         signature = request.POST.get('signature')
         sign = liqpay.str_to_sign(settings.LIQPAY_PRIVATE_KEY + data + settings.LIQPAY_PRIVATE_KEY)
         if sign == signature:
-            print('callback is valid')
+            print('CALLBACK IS VALID!')
         response = liqpay.decode_data_from_str(data)
-        print('Callback: ', response)
         output_callback(response)
         return HttpResponse()
