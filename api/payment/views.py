@@ -34,7 +34,6 @@ class PayView1(TemplateView):
             'amount': '3.22',
             'currency': 'USD',
             'description': 'HONDA ACCORD LX: Low KMS car',
-            'order_id': 'LowKMS-car',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
@@ -54,7 +53,6 @@ class PayView2(TemplateView):
             'amount': '5.99',
             'currency': 'USD',
             'description': 'HONDA CIVIC HATCHBACK LS: Fully-Loaded car',
-            'order_id' : 'FL-car',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
@@ -74,7 +72,6 @@ class PayView3(TemplateView):
             'amount': '10.99',
             'currency': 'USD',
             'description': 'HONDA ACCORD HYBRID LT: Price Reduced car',
-            'order_id': 'PR-car',
             'version': '3',
             'sandbox': 0, # sandbox mode, set to 1 to enable it
             'server_url': 'https://afternoon-reaches-36943.herokuapp.com/pay-callback/', # url to callback view
